@@ -18,4 +18,3 @@ function flatten(obj) {
 
 
 console.log(flatten({ a: { b: 1, c: { d: 2 } } }));
-// Expected: { 'a.b': 1, 'a.c.d': 2 }
