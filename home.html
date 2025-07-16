@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roll</title>
+    <link rel="stylesheet" href="design.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>
+            DICE ROLL by AVI ;&#41;
+        </h1>
+        <div class="dice-area">
+            <div id="dice1" class="dice">
+                🎲
+            </div>
+            <div id="dice2" class="dice hidden">
+                🎲
+            </div>  
+        </div>
+        <div class="controls">
+            <button onclick="rollOneDice()">Roll First Die</button>
+            <button onclick="rollTwoDice()">Roll Two Dices</button>
+        </div>
+        <div id="result"></div>
+    </div>
+    <script src="dice.js"></script>
+    
+</body>
+</html>
