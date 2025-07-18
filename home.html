@@ -1,4 +1,4 @@
-<html lang="en">
+<!-- <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,16 +15,59 @@
                 🎲
             </div>
             <div id="dice2" class="dice hidden">
-                🎲
+                🎲 // ???
             </div>  
         </div>
         <div class="controls">
-            <button onclick="rollOneDice()">Roll First Die</button>
+            <button onclick={rollOneDice()}>Roll First Die</button> // read about how we pass functions to onclick and onClick!
             <button onclick="rollTwoDice()">Roll Two Dices</button>
         </div>
         <div id="result"></div>
     </div>
     <script src="dice.js"></script>
     
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dice Game</title>
+  <link rel="stylesheet" href="design.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>DICE DUEL: Avanish vs <span id="player2-name">CPU</span></h1>
+    
+    <input type="text" id="name-input" placeholder="Enter Player 2 Name" />
+    <button id="set-name">Set Player 2 Name</button>
+
+    <div class="dice-area">
+      <div>
+        <h2>Avanish 🎲</h2>
+        <div id="p1-dice1" class="dice"></div>
+        <div id="p1-dice2" class="dice"></div>
+        <p id="p1-score">Score: 0</p>
+      </div>
+      <div>
+        <h2 id="p2-title">CPU 🎲</h2>
+        <div id="p2-dice1" class="dice"></div>
+        <div id="p2-dice2" class="dice"></div>
+        <p id="p2-score">Score: 0</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="p1-roll">Avanish Rolls</button>
+      <button id="p2-roll">CPU Roll</button>
+      <button id="reset">Reset Game</button>
+    </div>
+
+    <div id="result"></div>
+  </div>
+  <script src="dice.js"></script>
 </body>
 </html>
