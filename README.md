@@ -1,4 +1,4 @@
-# Node.js Calculator CLI Tool (Advanced)
+# Node.js Calculator CLI Tool (Advanced) and Fetching Dummy Employee Data
 
 A modular, extensible CLI calculator built with Node.js, equipped with modern developer tooling and support for fetching external data. Supports Babel for ES6+, ESLint with Airbnb style guide, Husky for pre-commit linting, and utility packages like `lodash`, `moment`, `node-fetch`, and `request`.
 
@@ -141,4 +141,70 @@ npm run fetch-request     # uses request/request-promise
 npm run build
 ```
 
+
+
+---
+
+##  Fetching Dummy Employee Data
+
+This project includes a script that fetches employee data from an external API and stores it as a timestamped `.json` file in the `/output` directory.
+
+###  File: `src/fetchEmployees.js`
+
+Uses `node-fetch` and `moment`:
+
+```js
+const fetch = require('node-fetch');
+const fs = require('fs');
+const path = require('path');
+const moment = require('moment');
+
+const API_URL = 'https://dummyjson.com/users';
+const OUTPUT_DIR = path.join(process.cwd(), 'output');
+
+if (!fs.existsSync(OUTPUT_DIR)) {
+  fs.mkdirSync(OUTPUT_DIR);
+}
+
+async function fetchAndSaveEmployees() {
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+
+    const timestamp = moment().format('YYYY-MM-DD_HH-mm-ss');
+    const filePath = path.join(OUTPUT_DIR, `employees_${timestamp}.json`);
+
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+    console.log(`Employee data saved to: ${filePath}`);
+  } catch (err) {
+    console.error('Failed to fetch data:', err.message);
+  }
+}
+
+fetchAndSaveEmployees();
+```
+
+---
+
+###  Output Sample
+
+Files saved like:
+
+```
+/output/employees_2025-07-22_15-45-30.json
+```
+
+---
+
+###  Run the Script
+
+```bash
+npm run fetch-data
+```
+
+This runs:
+
+```json
+"fetch-data": "npm run build && node dist/fetchEmployees.js"
+```
 
