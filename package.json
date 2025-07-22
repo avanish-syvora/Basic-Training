@@ -1,0 +1,45 @@
+{
+  "name": "basic-training",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir outsrc",
+    "start": "node outsrc/index.js",
+    "add": "npm run build && node outsrc/index.js add",
+    "subtract": "npm run build && node outsrc/index.js subtract",
+    "multiply": "npm run build && node outsrc/index.js multiply",
+    "divide": "npm run build && node outsrc/index.js divide",
+    "fetch-data": "npm run build && node outsrc/fetchEmployees.js",
+    "fetch-request": "npm run build && node outsrc/fetchWithRequest.js",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avanish-syvora/Basic-Training.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/avanish-syvora/Basic-Training/issues"
+  },
+  "homepage": "https://github.com/avanish-syvora/Basic-Training#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@eslint/js": "^9.31.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.3.0",
+    "husky": "^8.0.0"
+  },
+  "dependencies": {
+    "moment": "^2.30.1",
+    "node-fetch": "^2.7.0"
+  }
+}
