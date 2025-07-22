@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "title": "Senior React Developer",
+    "description": "Looking for a React.js developer experienced with Redux and JavaScript frameworks. Exposure to REST APIs and Node is preferred."
+  },
+  {
+    "id": 2,
+    "title": "DevOps Engineer",
+    "description": "Must have hands-on with Docker, Kubernetes, CI/CD pipelines, and cloud platforms like AWS."
+  }
+]
