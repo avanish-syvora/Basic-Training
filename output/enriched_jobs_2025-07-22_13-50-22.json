@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Senior React Developer",
+    "description": "Looking for a React.js developer experienced with Redux and JavaScript frameworks. Exposure to REST APIs and Node is preferred.",
+    "technologies": [
+      {
+        "name": "React",
+        "score": 5,
+        "matchedFrom": [
+          "react",
+          "react.js"
+        ],
+        "confidence": "high"
+      },
+      {
+        "name": "JavaScript",
+        "score": 2,
+        "matchedFrom": [
+          "javascript",
+          "js"
+        ],
+        "confidence": "medium"
+      },
+      {
+        "name": "Redux",
+        "score": 1,
+        "matchedFrom": [
+          "redux"
+        ],
+        "confidence": "low"
+      },
+      {
+        "name": "Node.js",
+        "score": 1,
+        "matchedFrom": [
+          "node"
+        ],
+        "confidence": "low"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "DevOps Engineer",
+    "description": "Must have hands-on with Docker, Kubernetes, CI/CD pipelines, and cloud platforms like AWS.",
+    "technologies": [
+      {
+        "name": "Docker",
+        "score": 1,
+        "matchedFrom": [
+          "docker"
+        ],
+        "confidence": "low"
+      },
+      {
+        "name": "Kubernetes",
+        "score": 1,
+        "matchedFrom": [
+          "kubernetes"
+        ],
+        "confidence": "low"
+      },
+      {
+        "name": "AWS",
+        "score": 1,
+        "matchedFrom": [
+          "aws"
+        ],
+        "confidence": "low"
+      }
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "React",
+    "synonyms": ["react", "reactjs", "react.js"]
+  },
+  {
+    "name": "JavaScript",
+    "synonyms": ["javascript", "js", "ecmascript"]
+  },
+  {
+    "name": "Redux",
+    "synonyms": ["redux"]
+  },
+  {
+    "name": "Docker",
+    "synonyms": ["docker"]
+  },
+  {
+    "name": "Kubernetes",
+    "synonyms": ["kubernetes", "k8s"]
+  },
+  {
+    "name": "AWS",
+    "synonyms": ["aws", "amazon web services"]
+  },
+  {
+    "name": "Node.js",
+    "synonyms": ["node", "nodejs", "node.js"]
+  }
+]
