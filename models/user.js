@@ -10,6 +10,12 @@ const User = sequelize.define('User', {
   password: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  // ADDED ROLE FIELD
+  role: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'user' // Default role for new users
   }
 });
 

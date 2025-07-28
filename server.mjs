@@ -35,9 +35,9 @@ app.use(authRoutes);
     await sequelize.authenticate(); // Check DB connection
     await sequelize.sync();         // Sync models (create table if not exists)
     app.listen(3000, () => {
-      console.log('✅ Server running at http://localhost:3000');
+      console.log(' Server running at http://localhost:3000');
     });
   } catch (err) {
-    console.error('❌ Unable to connect to DB:', err);
+    console.error(' Unable to connect to DB:', err);
   }
 })();
