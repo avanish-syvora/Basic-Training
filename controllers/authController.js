@@ -1,21 +1,43 @@
-import { getUsers, saveUser } from '../models/userModel.js';
+import bcrypt from 'bcrypt';
+import User from '../models/user.js';
 
-export async function signup(req, res) {
+export const signup = async (req, res) => {
   const { username, password } = req.body;
-  if (!username || !password) return res.send('Missing fields');
+  try {
+    const exists = await User.findOne({ where: { username } });
+    if (exists) return res.send('User already exists');
 
-  const avatar = req.file ? `/uploads/${req.file.filename}` : null;
-  const user = { username, password, avatar };
-  await saveUser(user);
-  res.redirect('/login');
-}
+    const hash = await bcrypt.hash(password, 10);
+    await User.create({ username, password: hash });
+    res.redirect('/login');
+  } catch (err) {
+    res.send('Signup error');
+  }
+};
 
-export async function login(req, res) {
+export const login = async (req, res) => {
   const { username, password } = req.body;
-  const users = await getUsers();
-  const found = users.find(u => u.username === username && u.password === password);
+  try {
+    const user = await User.findOne({ where: { username } });
+    if (!user) return res.send('User not found');
 
-  if (!found) return res.send('Invalid credentials');
-  req.session.user = found;
-  res.send(`<h1>Welcome ${found.username}</h1><img src="${found.avatar}" width="100" />`);
-}
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return res.send('Incorrect password');
+
+    req.session.user = user;
+    res.redirect('/dashboard');
+  } catch (err) {
+    res.send('Login error');
+  }
+};
+
+export const dashboard = (req, res) => {
+  if (!req.session.user) return res.redirect('/login');
+  res.render('dashboard', { user: req.session.user });
+};
+
+export const logout = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/login');
+  });
+};

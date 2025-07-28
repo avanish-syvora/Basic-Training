@@ -1,29 +1,43 @@
+// server.mjs
 import express from 'express';
 import session from 'express-session';
-import cookieParser from 'cookie-parser';
-import path from 'path';
+import dotenv from 'dotenv';
+import sequelize from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import User from './models/user.js';
+
+dotenv.config(); // Load environment variables
 
 const app = express();
-const __dirname = path.resolve();
 
-// Middleware
+// Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+
+// Static files like CSS, images, etc. will be served from /public
+app.use(express.static('public'));
+
+// Session config using secret from .env
 app.use(session({
-  secret: 'supersecretkey',
+  secret: process.env.SESSION_SECRET || 'defaultsecret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true
 }));
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Set EJS as view engine
+app.set('view engine', 'ejs');
 
-// Routes
-app.use('/', authRoutes);
+// Routing middleware
+app.use(authRoutes);
 
-// Start server
-app.listen(3000, () => {
-  console.log('Server running at http://localhost:3000');
-});
+// Initialize and sync DB, then start server
+(async () => {
+  try {
+    await sequelize.authenticate(); // Check DB connection
+    await sequelize.sync();         // Sync models (create table if not exists)
+    app.listen(3000, () => {
+      console.log('✅ Server running at http://localhost:3000');
+    });
+  } catch (err) {
+    console.error('❌ Unable to connect to DB:', err);
+  }
+})();
