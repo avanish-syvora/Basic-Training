@@ -4,6 +4,7 @@ import session from 'express-session';
 import dotenv from 'dotenv';
 import sequelize from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import User from './models/user.js';
 
 dotenv.config(); // Load environment variables
@@ -28,12 +29,13 @@ app.set('view engine', 'ejs');
 
 // Routing middleware
 app.use(authRoutes);
+app.use(userRoutes);
 
 // Initialize and sync DB, then start server
 (async () => {
   try {
     await sequelize.authenticate(); // Check DB connection
-    await sequelize.sync();         // Sync models (create table if not exists)
+    await sequelize.sync();         // Sync models (
     app.listen(3000, () => {
       console.log(' Server running at http://localhost:3000');
     });
