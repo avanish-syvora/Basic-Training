@@ -32,8 +32,9 @@ export const login = async (req, res) => {
 };
 
 export const dashboard = (req, res) => {
-  if (!req.session.user) return res.redirect('/login');
-  res.render('dashboard', { user: req.session.user });
+  const user = req.user || req.session.user;
+  if (!user) return res.redirect('/login');
+  res.render('dashboard', { user });
 };
 
 export const logout = (req, res) => {
