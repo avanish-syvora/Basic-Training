@@ -1,0 +1,6 @@
+Difference between source and sh :
+source (or . ) executes commands from a file in the current shell process. Any variables or
+functions defined in that file remain in the current environment. In contrast, sh script.sh
+(or bash script.sh ) runs the script in a new shell (subprocess). Changes to variables or
+directory inside that script do not affect the parent shell. In summary: source keeps you in the
+same shell (changes persist), whereas sh spawns a child shell (changes are isolated
