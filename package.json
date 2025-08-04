@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "add": "node index.js add",
     "subtract": "node index.js subtract",
     "multiply": "node index.js multiply",
@@ -16,9 +17,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/avanish-syvora/Basic-Training/issues"
   },
-  "homepage": "https://github.com/avanish-syvora/Basic-Training#readme"
+  "homepage": "https://github.com/avanish-syvora/Basic-Training#readme",
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
 }
