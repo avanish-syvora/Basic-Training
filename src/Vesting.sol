@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "./IVesting.sol"; // Import the new interface file
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./IVesting.sol";
 
 /**
  * @title Vesting
@@ -14,8 +14,9 @@ contract Vesting is IVesting, Ownable {
     using SafeERC20 for IERC20;
 
     address public manager;
+    // multiple referer 
     address public referrer;
-    uint256 public reward = 10;
+    uint256 public reward = 10; // use bps 10,000 = 100%
     mapping(address => mapping(address => VestingSchedule)) public schedules;
 
     /**
@@ -27,6 +28,8 @@ contract Vesting is IVesting, Ownable {
         manager = _managerAdd;
     }
 
+
+// incomplete natspec
     /**
      * @notice addresses for the fees modes.
      */
@@ -143,7 +146,10 @@ contract Vesting is IVesting, Ownable {
     function _reward(VestingSchedule memory _schedule, uint256 _amount) internal view returns (uint256) {
         if (reward == 0) return 0;
 
+// wrong 
         uint256 totalDuration = _schedule.endTime - _schedule.startTime;
+        // 4yr-0yr
+        //5yr
         uint256 time = block.timestamp > _schedule.endTime ? totalDuration : block.timestamp - _schedule.startTime;
 
         uint256 rewardF = (_amount * reward * time * time) / (totalDuration * totalDuration * 100);
