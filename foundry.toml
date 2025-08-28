@@ -2,5 +2,15 @@
 src = "src"
 out = "out"
 libs = ["lib"]
+remappings = ["@openzeppelin/=lib/openzeppelin-contracts/"]
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+# Tell Foundry to load the variables from our .env file
+dotenv = [".env"]
+
+# Configure Etherscan for verification
+[etherscan]
+holesky = { key = "${ETHERSCAN_API_KEY}", chain = 17000 }
+
+# Configure RPC endpoints
+[rpc_endpoints]
+holesky = "${HOLESKY_RPC_URL}"
