@@ -1,0 +1,5 @@
+TokenForwardingTest:test_GetTokenBalance() (gas: 51828)
+TokenForwardingTest:test_Mint() (gas: 27410)
+TokenForwardingTest:test_StartForwardingChain_Success() (gas: 117920)
+TokenForwardingTest:test_StartRejectionChain_Reverts() (gas: 86701)
+TokenForwardingTest:test_TryToPullTokens_Reverts() (gas: 12343)
