@@ -8,7 +8,7 @@ contract Bridge is Ownable {
     IUniversalToken public immutable token;
     address public relayer;
 
-    // Replay attacks se bachne ke liye nonce ka istemal
+
     uint256 public nonce;
     mapping(uint256 => bool) public processedNonces;
 

@@ -1,18 +1,27 @@
 require("@nomicfoundation/hardhat-toolbox");
-require('dotenv').config(); // Add this line
+require('dotenv').config();
 
-const DEPLOYER_PRIVATE_KEY = process.env.RELAYER_PRIVATE_KEY || "";
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
+const HOODI_RPC_URL = process.env.HOODI_RPC_URL || "";
+const BASE_SEPOLIA_RPC_URL = process.env.BASE_SEPOLIA_RPC_URL || "";
 
 module.exports = {
   solidity: "0.8.20",
   networks: {
-    chainA: {
-      url: process.env.CHAIN_A_RPC_URL || "http://127.0.0.1:8545",
-      accounts: [DEPLOYER_PRIVATE_KEY],
+
+    localhost: {
+      url: "http://127.0.0.1:8545",
     },
-    chainB: {
-      url: process.env.CHAIN_B_RPC_URL || "http://127.0.0.1:9545",
-      accounts: [DEPLOYER_PRIVATE_KEY],
+
+    hoodiTestnet: {
+      url: HOODI_RPC_URL,
+      accounts: [PRIVATE_KEY],
+      chainId: 560048,
+    },
+    baseSepolia: {
+      url: BASE_SEPOLIA_RPC_URL,
+      accounts: [PRIVATE_KEY],
+      chainId: 84532,
     },
   },
 };
