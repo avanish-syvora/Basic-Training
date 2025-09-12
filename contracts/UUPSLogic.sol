@@ -22,7 +22,7 @@ contract UUPSTokenV1 is ERC20Upgradeable, CustomOwnableUpgradeable {
     }
 
     /**
-     * @notice UUPS pattern ka core: upgrade logic implementation ke andar.
+     * @notice UUPS pattern core: upgrade logic inside implementation
      */
     function upgradeTo(address newImplementation) external onlyOwner {
         bytes32 slot = _IMPLEMENTATION_SLOT;
@@ -69,9 +69,7 @@ contract UUPSTokenV2 is ERC20Upgradeable, CustomOwnableUpgradeable {
         emit Unpaused(msg.sender);
     }
 
-    /**
-     * @notice Upgrade logic V2 mein bhi hona zaroori hai.
-     */
+
     function upgradeTo(address newImplementation) external onlyOwner {
         bytes32 slot = _IMPLEMENTATION_SLOT;
         assembly {

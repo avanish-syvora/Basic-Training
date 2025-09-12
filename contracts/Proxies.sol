@@ -4,14 +4,14 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * @title Proxy
- * @dev Ek basic proxy contract jo saare calls ko ek implementation contract pe delegate karta h
+ * @dev A basic proxy contract that delegates all calls to an implementation contract
  */
 abstract contract Proxy {
-    // EIP-1967 standard ke according implementation address ka ss
+    // EIP-1967 standard implementation address storage slot
     bytes32 private constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
 
     /**
-     * @dev Implementation contract ka address return karta ha
+     * @dev Returns the implementation contract address
      */
     function _implementation() internal view returns (address impl) {
         bytes32 slot = _IMPLEMENTATION_SLOT;
@@ -21,7 +21,7 @@ abstract contract Proxy {
     }
 
     /**
-     * @dev Implementation contract ka address set karta hai
+     * @dev Sets the implementation contract address
      */
     function _setImplementation(address newImplementation) internal {
         bytes32 slot = _IMPLEMENTATION_SLOT;
@@ -31,7 +31,7 @@ abstract contract Proxy {
     }
 
     /**
-     * @dev Saare calls ko implementation contract pe delegate karta hai.
+     * @dev Delegates all calls to the implementation contract
      */
     fallback() external payable virtual {
         _fallback();
@@ -42,13 +42,13 @@ abstract contract Proxy {
         require(impl != address(0), "Proxy: implementation not set");
 
         assembly {
-            // Calldata ko copy karo.
+            // Copy calldata
             calldatacopy(0, 0, calldatasize())
             
-            // Delegatecall karo.
+            // Delegatecall
             let result := delegatecall(gas(), impl, 0, calldatasize(), 0, 0)
             
-            // Return data ko copy karo.
+            // Copy return data
             returndatacopy(0, 0, returndatasize())
 
             switch result
@@ -64,13 +64,13 @@ abstract contract Proxy {
 
 /**
  * @title ProxyAdmin
- * @notice Yeh Transparent proxies ka owner hota hai aur upgrades ko manage karta h
+ * @notice The owner of the Transparent proxies who manages upgrades
  */
 contract ProxyAdmin is Ownable {
     constructor() Ownable(msg.sender) {}
 
     /**
-     * @notice Proxy ko ek naye implementation pe upgrade karta h
+     * @notice Upgrades the proxy to a new implementation
      */
     function upgrade(address proxy, address newImplementation) external onlyOwner {
         (bool success, ) = proxy.call(
@@ -82,7 +82,7 @@ contract ProxyAdmin is Ownable {
 
 /**
  * @title TransparentProxy
- * @notice Ek proxy jiska admin logic business logic se alag hota hai.
+ * @notice A proxy with a separate admin logic
  */
 contract TransparentProxy is Proxy {
     // EIP-1967 standard ke according admin address ka storage slot.
@@ -112,7 +112,7 @@ contract TransparentProxy is Proxy {
     }
 
     /**
-     * @dev Fallback function ko override karke admin logic add karta hai.
+     * @dev Overrides the fallback function to add admin logic
      */
     fallback() external payable override {
         if (msg.sender == _admin()) {
@@ -135,6 +135,7 @@ contract TransparentProxy is Proxy {
 
 /**
  * @title UUPSProxy
+ * @dev A proxy that uses the UUPS pattern for upgrades
  */
 contract UUPSProxy is Proxy {
     constructor(address initialImplementation, bytes memory data) payable {
